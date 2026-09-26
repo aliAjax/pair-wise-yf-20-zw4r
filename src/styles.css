@@ -18,7 +18,8 @@ body {
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
 }
 
@@ -103,7 +104,7 @@ button {
 
 .workspace {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
   gap: 18px;
   margin-bottom: 18px;
 }
@@ -219,4 +220,305 @@ input {
     min-height: 210px;
     padding: 24px;
   }
+}
+
+/* ---- 场地复用台 ---- */
+
+select {
+  min-height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: #ffffff;
+  padding: 0 10px;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.mini {
+  min-height: 30px;
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+.muted {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.danger {
+  color: var(--secondary);
+}
+
+.banner {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #f8fafc;
+  color: #526071;
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+
+.banner.danger {
+  border-color: color-mix(in srgb, var(--secondary) 40%, var(--border));
+  background: color-mix(in srgb, var(--secondary) 7%, #ffffff);
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+.banner.ok {
+  border-color: color-mix(in srgb, #16a34a 40%, var(--border));
+  background: color-mix(in srgb, #16a34a 8%, #ffffff);
+  color: #15803d;
+  font-weight: 600;
+}
+
+.conflicts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.conflicts li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--secondary) 30%, var(--border));
+  border-radius: 8px;
+  background: #fffafa;
+  font-size: 14px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  margin-left: 8px;
+}
+
+.conflicts .badge {
+  margin-left: 0;
+}
+
+.badge.kind-out-of-bounds {
+  background: color-mix(in srgb, var(--secondary) 14%, #ffffff);
+  color: var(--secondary);
+}
+
+.badge.kind-overlap {
+  background: color-mix(in srgb, var(--accent) 20%, #ffffff);
+  color: #b45309;
+}
+
+.badge.kind-past-end {
+  background: color-mix(in srgb, var(--primary) 12%, #ffffff);
+  color: var(--primary);
+}
+
+.badge.lock {
+  background: #eef2f7;
+  color: #475569;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+th {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+td input {
+  width: 74px;
+  min-height: 32px;
+  padding: 0 8px;
+}
+
+td.anchor {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.seg-row td {
+  background: #f1f5fb;
+  font-weight: 700;
+  color: #334155;
+}
+
+.seg-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  margin-right: 8px;
+}
+
+.row-conflict td {
+  background: color-mix(in srgb, var(--secondary) 6%, #ffffff);
+}
+
+.row-selected td {
+  outline: 2px solid color-mix(in srgb, var(--primary) 55%, transparent);
+  outline-offset: -2px;
+}
+
+td.changed {
+  color: var(--secondary);
+  font-weight: 700;
+}
+
+.diff-pick {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 10px;
+  font-size: 13px;
+  color: #526071;
+}
+
+.legend i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  margin-right: 6px;
+}
+
+/* 时间轴 */
+
+.timeline {
+  width: 100%;
+  height: auto;
+}
+
+.tl-grid {
+  stroke: #eef2f7;
+  stroke-width: 1;
+}
+
+.tl-tick {
+  font-size: 11px;
+  fill: #94a3b8;
+}
+
+.tl-seg {
+  font-size: 12px;
+  font-weight: 700;
+  fill: #475569;
+}
+
+.tl-row {
+  stroke: #e2e8f0;
+  stroke-width: 1;
+}
+
+.tl-shot {
+  cursor: pointer;
+}
+
+.tl-end {
+  stroke: #172033;
+  stroke-width: 1.5;
+}
+
+.tl-end-label {
+  font-size: 11px;
+  font-weight: 700;
+  fill: #172033;
+}
+
+.tl-curfew {
+  stroke: var(--secondary);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+}
+
+.tl-curfew-label {
+  font-size: 11px;
+  font-weight: 700;
+  fill: var(--secondary);
+}
+
+/* 点位平面图 */
+
+.sitemap {
+  width: 100%;
+  height: auto;
+  background: #fbfdff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.sm-grid {
+  stroke: #eef2f7;
+  stroke-width: 0.4;
+}
+
+.sm-bound {
+  fill: none;
+  stroke: #94a3b8;
+  stroke-width: 0.8;
+}
+
+.sm-label {
+  font-size: 6px;
+  fill: #64748b;
+}
+
+.sm-aim {
+  fill: var(--accent);
+  stroke: #b45309;
+  stroke-width: 0.5;
+}
+
+.sm-point {
+  fill: #172033;
+}
+
+.sm-point-no {
+  font-size: 6px;
+  font-weight: 700;
+  fill: #172033;
+}
+
+.sm-burst {
+  cursor: pointer;
 }
